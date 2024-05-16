@@ -1,2 +1,2 @@
 # rockPaperScissors
-A game of rock, paper, scissors shoot.
+A game of rock, paper, scissors shoot using javascript.
