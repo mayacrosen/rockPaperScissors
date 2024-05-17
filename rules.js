@@ -1,2 +1,9 @@
 // Where the actual game is played
-console.log("Well hello there.");
+
+function getComputerChoice() {
+    const choices = ["rock", "paper", "scissors"];
+    const index = Math.floor(Math.random() * 3);
+    return choices[index];
+}
+
+console.log(getComputerChoice())
