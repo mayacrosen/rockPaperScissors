@@ -23,8 +23,10 @@ function addRound(words) {
 }
 
 
-function clearRounds(e) {
-    rounds.removeChild(e);
+function clearRounds() {
+    while (rounds.firstChild) {
+        rounds.removeChild(rounds.lastChild);
+    }
 }
 
 
@@ -32,22 +34,8 @@ function playRound() {
     const computerChoice = getComputerChoice();
     const humanChoice = this.id;
 
-    if (humanScore >= 5 || computerScore >= 5) {
-        console.log("reset");
-        rounds.childNodes.forEach(clearRounds)
-        if (humanScore > computerScore) {
-            computerChoiceDisplay.textContent = "You win! Computer is sad";
-        }
-        else {
-            computerChoiceDisplay.textContent = "You lose. Computer is happy"
-        }
-        
-    }
-
-
     if (humanChoice == computerChoice) {
         addRound("You tie. Both chose " + humanChoice);
-        return "tie";
         }
     if (humanChoice == "rock") {
         console.log("rock");
@@ -55,13 +43,11 @@ function playRound() {
             addRound("You lose! Paper beats rock");
             computerScore++;
             updateScores();
-            return "computer";
         }
         if (computerChoice == "scissors") {
             addRound("You win! Rock beats scissors");
             humanScore++;
             updateScores();
-            return "player";
         }
         }
 
@@ -71,13 +57,11 @@ function playRound() {
             addRound("You win! Paper beats rock");
             humanScore++;
             updateScores();
-            return "player";
         }
         if (computerChoice == "scissors") {
             addRound("You lose! Scissors beat paper");
             computerScore++;
             updateScores();
-            return "computer";
         }
     }
     if (humanChoice == "scissors") {
@@ -86,14 +70,23 @@ function playRound() {
             addRound("You lose! Rock beats scissors");
             computerScore++;
             updateScores();
-            return "computer";
         }
         if (computerChoice == "paper") {
             addRound("You win! Scissors beats paper");
             humanScore++;
             updateScores();
-            return "player";
         }
+    }
+    if (humanScore >= 5 || computerScore >= 5) {
+        console.log("reset");
+        clearRounds();
+        if (humanScore > computerScore) {
+            computerChoiceDisplay.textContent = "You win! Computer is sad";
+        }
+        else {
+            computerChoiceDisplay.textContent = "You lose. Computer is happy"
+        }
+        
     }
     
 }
